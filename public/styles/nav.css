@@ -1,0 +1,24 @@
+nav {
+  height: 80px;
+  color: #e8fdff;
+  background-color: #00a087;
+  font-family: 'Roboto', sans-serif;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+#nav-bar .logo {
+  height: 80px;
+  width: 80px;
+  float: left;
+}
+
+#nav-bar .header {
+  height: 2rem;
+  width: 2rem;
+  line-height: 80px;
+  float: left;
+}
+

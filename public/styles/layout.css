@@ -5,6 +5,7 @@
  */
 html {
   box-sizing: border-box;
+  height: 100%;
 }
 *, *:before, *:after {
   box-sizing: inherit;
@@ -18,8 +19,21 @@ body {
   margin: 0;
   color: #244751;
   background-color: #eee;
+  font-family: 'Roboto', sans-serif;
+  height: 100%;
 }
 
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
+
+ .container {
+  border-top: 140px;
+  width: 450px;
+  margin: 80px auto;
+  height: 100%;
+  display: flex;
+  background-color: #FFFFFF;
+  align-items: flex-start;
+  flex-direction: column;
+}

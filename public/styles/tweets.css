@@ -1,0 +1,59 @@
+section.tweets {
+
+}
+
+.smile {
+  border-radius: 15px;
+}
+
+header.tweet-header {
+  background-color: lightgrey;
+}
+
+h3.tweet-message {
+  font-size: 15px;
+  margin-left: 5px;
+  background-color: white;
+}
+
+span.fullname {
+  top: -18px;
+  left: 55px;
+  font-size: 20px;
+  text-align: left;
+  vertical-align: middle;
+  display: table-cell;
+  position: absolute;
+}
+
+span.handle {
+  text-align: right;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+div.tweet-header-div {
+  width: 100%;
+}
+
+.tweet-footer {
+  border-top: 2px solid grey;
+}
+
+.tweet-article:hover {
+  opacity: 0.5;
+}
+
+span.age {
+  margin-left: 5px;
+}
+
+.tweet-article {
+  border-radius: 15px;
+  border-width: thin;
+  border: solid;
+  margin: 1em 2em;
+  width: 85%;
+  border-color: black;
+  background-color: white;
+}
