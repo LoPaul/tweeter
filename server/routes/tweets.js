@@ -1,7 +1,7 @@
 "use strict";
 
 const userHelper    = require("../lib/util/user-helper")
-
+var escapeHtml = require('escape-html');
 const express       = require('express');
 const tweetsRoutes  = express.Router();
 
@@ -27,7 +27,7 @@ module.exports = function(DataHelpers) {
     const tweet = {
       user: user,
       content: {
-        text: req.body.text
+        text: escapeHtml(req.body.text)
       },
       created_at: Date.now()
     };

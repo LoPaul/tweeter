@@ -10,52 +10,6 @@
 
 // Test / driver code (temporary). Eventually will get this from the server.
 
-const data = [
-  {
-    "user": {
-      "name": "Newton",
-      "avatars": {
-        "small":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_50.png",
-        "regular": "https://vanillicon.com/788e533873e80d2002fa14e1412b4188.png",
-        "large":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png"
-      },
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "created_at": 1461116232227
-  },
-  {
-    "user": {
-      "name": "Descartes",
-      "avatars": {
-        "small":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_50.png",
-        "regular": "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc.png",
-        "large":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_200.png"
-      },
-      "handle": "@rd" },
-    "content": {
-      "text": "Je pense , donc je suis"
-    },
-    "created_at": 1461113959088
-  },
-  {
-    "user": {
-      "name": "Johann von Goethe",
-      "avatars": {
-        "small":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_50.png",
-        "regular": "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1.png",
-        "large":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_200.png"
-      },
-      "handle": "@johann49"
-    },
-    "content": {
-      "text": "Es ist nichts schrecklicher als eine tätige Unwissenheit."
-    },
-    "created_at": 1461113796368
-  }
-];
 
 function renderTweets(tweets) {
   // loops through tweets
@@ -68,16 +22,25 @@ function renderTweets(tweets) {
 
 
 $(document).ready(function() {
-  renderTweets(data);
+  $('#compose')
+  .on('click', function (event) {
+    $(".new-tweet").slideToggle();
+  })
+
 })
+
+function loadTweets() {
+  let tweets = $.get("/tweets", function(data) {
+    renderTweets(data);
+  });
+}
 
 function createTweetElement(tweeterObject) {
   let username = tweeterObject.user.name;
   let avatarLink = tweeterObject.user.avatars.small;
   let handle = tweeterObject.user.handle;
   let content = tweeterObject.content.text;
-//  let daysOld = moment(tweeterObject.created_at).fromNow();
-  let daysOld = tweeterObject.created_at;
+  let daysOld = moment(tweeterObject.created_at).fromNow();
 
 let $article = $(`<article class="tweet-article">
     <div style="position: relative">
@@ -100,4 +63,57 @@ let $article = $(`<article class="tweet-article">
     `);
  return $article
 };
+
+$(function() {
+  var $button = $('#tweet-form');
+  $button.on('submit', function (event) {
+    event.preventDefault();
+
+    let $inputStr = $("#text");
+    let inputStr = $inputStr.val();
+    if(inputStr === null || inputStr.length === 0) {
+      renderError("* Error: Please enter a tweet.");
+      return;
+    }
+    if(inputStr.length > 140) {
+      renderError("* Error: Tweet more than 140 characters.");
+      return;
+    }
+  
+    renderError("");
+    let data = $(this).serialize() ;
+    $.ajax({
+      method: "POST",
+      url: "/tweets",
+      data: data
+    })
+      .done(function(newTweet) {
+        loadTweets([newTweet]);
+      })
+      $inputStr.val("");
+
+  });
+
+
+
+})
+
+function renderError(errorString) {
+  if(errorString.length === 0) {
+    $("#error-message").slideUp();
+  } else {
+    $("#error-message").slideDown();
+  }
+  $("#error-message").text(errorString);
+}
+
+
+$.ajax({
+  method: "GET",
+  url: "/tweets",
+})
+.done(function(newTweet) {
+  renderError("");
+  renderTweets(newTweet)
+})
 

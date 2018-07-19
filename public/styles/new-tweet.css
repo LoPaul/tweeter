@@ -21,3 +21,7 @@ section.new-tweet {
   float: right;
 }
 
+#error-message {
+  margin: 1em 0;
+  color: red;
+}
