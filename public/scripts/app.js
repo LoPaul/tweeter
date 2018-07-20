@@ -110,8 +110,8 @@ $(function() {
       .done(function(newTweet) {
         loadTweets([newTweet]);
       })
-      $inputStr.val("");
-      $("#counter").text("0");
+    $inputStr.val("");
+    $("#counter").text("0");
   });
 })
 
