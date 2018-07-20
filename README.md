@@ -5,6 +5,7 @@ Tweeter is a simple, single-page Twitter clone.
 ## Final Product
 
 ![Main Screen]
+(https://github.com/LoPaul/tweeter/blob/master/docs/tweeter-screenshot.png)
 
 ## Dependencies
 
