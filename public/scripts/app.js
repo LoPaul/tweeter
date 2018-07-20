@@ -13,20 +13,38 @@
 
 function renderTweets(tweets) {
   // loops through tweets
-    // calls createTweetElement for each tweet
-    // takes return value and appends it to the tweets container
-    for(tweet of tweets) {
-      $('#tweets').prepend(createTweetElement(tweet)); 
-    }
+  // calls createTweetElement for each tweet
+  // takes return value and appends it to the tweets container
+  for(tweet of tweets) {
+    $('#tweets').prepend(createTweetElement(tweet)); 
+  }
+  hideShowRetweet();
 }
 
-$(document).ready(function() {
+function composeButtonClick() {
   $('#compose')
     .on('click', function(event) {
       $(".new-tweet").slideToggle();
     $("#text").focus();
-  })
-  $("#text").focus();
+  });
+}
+
+function hideShowRetweet() {
+  let $retweet = $(".retweet");
+  $retweet.hide();
+  $(".tweet-article")
+    .hover( function(event) {
+      $(this).find($retweet).show();
+    },
+    function(event) {
+      $(this).find($retweet).hide();
+    }
+  );
+}
+
+$(document).ready(function() {
+  composeButtonClick();
+  $(".retweet").hide();
 })
 
 function loadTweets() {
@@ -57,6 +75,7 @@ function createTweetElement(tweeterObject) {
         </div>
       <footer class="tweet-footer">
         <span class="age" class="age">${daysOld}</span>
+        <img class="retweet" src="/images/retweet.png">
       </footer>
       </div>
     </article>
@@ -64,11 +83,12 @@ function createTweetElement(tweeterObject) {
   return $article
 };
 
+// Submit button with validation
 $(function() {
   var $button = $('#tweet-form');
   $button.on('submit', function (event) {
     event.preventDefault();
-
+    
     let $inputStr = $("#text");
     let inputStr = $inputStr.val();
     if(inputStr === null || inputStr.length === 0) {
@@ -79,7 +99,8 @@ $(function() {
       renderError("*Error: Tweet more than 140 characters.");
       return;
     }
-  
+
+    // clear text and ajax call with new tweet content
     renderError("");
     $.ajax({
       method: "POST",
@@ -90,6 +111,7 @@ $(function() {
         loadTweets([newTweet]);
       })
       $inputStr.val("");
+      $("#counter").text("0");
   });
 })
 

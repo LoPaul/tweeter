@@ -1,7 +1,7 @@
 nav {
   height: 80px;
   color: #e8fdff;
-  background-color: #00a087;
+  background-color: #660f31;
   font-family: 'Roboto', sans-serif;
   z-index: 9999;
   position: fixed;
@@ -12,8 +12,9 @@ nav {
 }
 
 #nav-bar .logo {
-  height: 80px;
-  width: 80px;
+  margin-top: 5px;
+  height: 65px;
+  width: 65px;
   float: left;
 }
 
