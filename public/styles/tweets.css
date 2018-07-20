@@ -4,21 +4,23 @@ section.tweets {
 
 .smile {
   border-radius: 15px;
+  margin: 8px;
 }
 
 header.tweet-header {
   background-color: lightgrey;
+  border-radius: 15px 15px 0 0 ;
 }
 
 h3.tweet-message {
   font-size: 15px;
-  margin-left: 5px;
+  margin: 8px;
   background-color: white;
 }
 
 span.fullname {
-  top: -18px;
-  left: 55px;
+  top: -10px;
+  left: 70px;
   font-size: 20px;
   text-align: left;
   vertical-align: middle;
@@ -30,6 +32,7 @@ span.handle {
   text-align: right;
   vertical-align: middle;
   display: table-cell;
+  padding-right: 8px;
 }
 
 div.tweet-header-div {
@@ -38,6 +41,7 @@ div.tweet-header-div {
 
 .tweet-footer {
   border-top: 2px solid grey;
+  margin: 8px;
 }
 
 .tweet-article:hover {

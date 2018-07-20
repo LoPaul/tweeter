@@ -3,6 +3,7 @@ nav {
   color: #e8fdff;
   background-color: #00a087;
   font-family: 'Roboto', sans-serif;
+  z-index: 9999;
   position: fixed;
   top: 0px;
   left: 0px;

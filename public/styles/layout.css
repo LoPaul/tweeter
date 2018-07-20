@@ -16,7 +16,7 @@ html {
  */
 
 body {
-  margin: 0;
+  margin: 80px;
   color: #244751;
   background-color: #eee;
   font-family: 'Roboto', sans-serif;
@@ -28,14 +28,16 @@ body {
  */
 
  .container {
-  border-top: 140px;
+  padding-top: 50px;
   width: 450px;
-  margin: 80px auto;
+  margin: 0 auto;
   height: 100%;
-  display: flex;
+
   background-color: #FFFFFF;
+
+  /* display: flex;
   align-items: flex-start;
-  flex-direction: column;
+  flex-direction: column; */
 }
 
 #compose {
