@@ -16,17 +16,17 @@ function renderTweets(tweets) {
     // calls createTweetElement for each tweet
     // takes return value and appends it to the tweets container
     for(tweet of tweets) {
-      $('#tweets').append(createTweetElement(tweet)); 
+      $('#tweets').prepend(createTweetElement(tweet)); 
     }
 }
 
-
 $(document).ready(function() {
   $('#compose')
-  .on('click', function (event) {
-    $(".new-tweet").slideToggle();
+    .on('click', function(event) {
+      $(".new-tweet").slideToggle();
+    $("#text").focus();
   })
-
+  $("#text").focus();
 })
 
 function loadTweets() {
@@ -42,7 +42,7 @@ function createTweetElement(tweeterObject) {
   let content = tweeterObject.content.text;
   let daysOld = moment(tweeterObject.created_at).fromNow();
 
-let $article = $(`<article class="tweet-article">
+  let $article = $(`<article class="tweet-article">
     <div style="position: relative">
       <header class="tweet-header">
         <div class="tweet-header-div" style="display: table;">
@@ -61,7 +61,7 @@ let $article = $(`<article class="tweet-article">
       </div>
     </article>
     `);
- return $article
+  return $article
 };
 
 $(function() {
@@ -72,32 +72,28 @@ $(function() {
     let $inputStr = $("#text");
     let inputStr = $inputStr.val();
     if(inputStr === null || inputStr.length === 0) {
-      renderError("* Error: Please enter a tweet.");
+      renderError("*Error: Please enter a tweet.");
       return;
     }
     if(inputStr.length > 140) {
-      renderError("* Error: Tweet more than 140 characters.");
+      renderError("*Error: Tweet more than 140 characters.");
       return;
     }
   
     renderError("");
-    let data = $(this).serialize() ;
     $.ajax({
       method: "POST",
       url: "/tweets",
-      data: data
+      data: $(this).serialize()
     })
       .done(function(newTweet) {
         loadTweets([newTweet]);
       })
       $inputStr.val("");
-
   });
-
-
-
 })
 
+// display error message below input box
 function renderError(errorString) {
   if(errorString.length === 0) {
     $("#error-message").slideUp();
@@ -107,13 +103,13 @@ function renderError(errorString) {
   $("#error-message").text(errorString);
 }
 
-
+// async call to fetch the tweets
 $.ajax({
   method: "GET",
   url: "/tweets",
 })
-.done(function(newTweet) {
-  renderError("");
-  renderTweets(newTweet)
-})
+  .done(function(newTweet) {
+    renderError("");
+    renderTweets(newTweet)
+  })
 
